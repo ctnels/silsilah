@@ -24,8 +24,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/', [UsersController::class, 'search']);
+
 Route::middleware('auth')->group(function () {
-    Route::get('/', [UsersController::class, 'search']);
 
     Route::controller(HomeController::class)->group(function () {
         Route::get('home', 'index')->name('home');
