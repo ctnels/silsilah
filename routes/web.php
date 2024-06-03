@@ -54,17 +54,17 @@ Route::middleware('auth')->group(function () {
         Route::delete('users/{user}', 'destroy')->name('users.destroy');
     });
 
-    Route::get('users/{user}/marriages', [UserMarriagesController::class, 'index'])->name('users.marriages');
+    // Route::get('users/{user}/marriages', [UserMarriagesController::class, 'index'])->name('users.marriages');
 
     Route::get('birthdays', [BirthdayController::class, 'index'])->name('birthdays.index');
     /**
      * Couple/Marriages Routes
      */
-    Route::controller(CouplesController::class)->group(function () {
-        Route::get('couples/{couple}', 'show')->name('couples.show');
-        Route::get('couples/{couple}/edit', 'edit')->name('couples.edit');
-        Route::patch('couples/{couple}', 'update')->name('couples.update');
-    });
+    // Route::controller(CouplesController::class)->group(function () {
+    //     Route::get('couples/{couple}', 'show')->name('couples.show');
+    //     Route::get('couples/{couple}/edit', 'edit')->name('couples.edit');
+    //     Route::patch('couples/{couple}', 'update')->name('couples.update');
+    // });
 
     Route::controller(ChangePasswordController::class)->group(function () {
         Route::get('password/change', 'show')->name('password_change');
