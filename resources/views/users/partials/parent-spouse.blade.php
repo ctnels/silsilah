@@ -1,23 +1,25 @@
 <div class="panel panel-default">
-    <div class="panel-heading"><h3 class="panel-title">{{ __('user.family') }}</h3></div>
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ __('user.family') }}</h3>
+    </div>
 
     <table class="table">
         <tbody>
             <tr>
                 <th class="col-sm-4">{{ __('user.father') }}</th>
                 <td class="col-sm-8">
-                    @can ('edit', $user)
+                    @can('edit', $user)
                         @if (request('action') == 'set_father')
-                        {{ Form::open(['route' => ['family-actions.set-father', $user->id]]) }}
-                        {!! FormField::select('set_father_id', $malePersonList, ['label' => false, 'value' => $user->father_id, 'placeholder' => __('app.select_from_existing_males')]) !!}
-                        <div class="input-group">
-                            {{ Form::text('set_father', null, ['class' => 'form-control input-sm', 'placeholder' => __('app.enter_new_name')]) }}
-                            <span class="input-group-btn">
-                                {{ Form::submit(__('app.update'), ['class' => 'btn btn-info btn-sm', 'id' => 'set_father_button']) }}
-                                {{ link_to_route('users.show', __('app.cancel'), [$user->id], ['class' => 'btn btn-default btn-sm']) }}
-                            </span>
-                        </div>
-                        {{ Form::close() }}
+                            {{ Form::open(['route' => ['family-actions.set-father', $user->id]]) }}
+                            {!! FormField::select('set_father_id', $malePersonList, ['label' => false, 'value' => $user->father_id, 'placeholder' => __('app.select_from_existing_males')]) !!}
+                            <div class="input-group">
+                                {{ Form::text('set_father', null, ['class' => 'form-control input-sm', 'placeholder' => __('app.enter_new_name')]) }}
+                                <span class="input-group-btn">
+                                    {{ Form::submit(__('app.update'), ['class' => 'btn btn-info btn-sm', 'id' => 'set_father_button']) }}
+                                    {{ link_to_route('users.show', __('app.cancel'), [$user->id], ['class' => 'btn btn-default btn-sm']) }}
+                                </span>
+                            </div>
+                            {{ Form::close() }}
                         @else
                             {{ $user->fatherLink() }}
                             <div class="pull-right">
@@ -32,18 +34,18 @@
             <tr>
                 <th>{{ __('user.mother') }}</th>
                 <td>
-                    @can ('edit', $user)
+                    @can('edit', $user)
                         @if (request('action') == 'set_mother')
-                        {{ Form::open(['route' => ['family-actions.set-mother', $user->id]]) }}
-                        {!! FormField::select('set_mother_id', $femalePersonList, ['label' => false, 'value' => $user->mother_id, 'placeholder' => __('app.select_from_existing_females')]) !!}
-                        <div class="input-group">
-                            {{ Form::text('set_mother', null, ['class' => 'form-control input-sm', 'placeholder' => __('app.enter_new_name')]) }}
-                            <span class="input-group-btn">
-                                {{ Form::submit(__('app.update'), ['class' => 'btn btn-info btn-sm', 'id' => 'set_mother_button']) }}
-                                {{ link_to_route('users.show', __('app.cancel'), [$user->id], ['class' => 'btn btn-default btn-sm']) }}
-                            </span>
-                        </div>
-                        {{ Form::close() }}
+                            {{ Form::open(['route' => ['family-actions.set-mother', $user->id]]) }}
+                            {!! FormField::select('set_mother_id', $femalePersonList, ['label' => false, 'value' => $user->mother_id, 'placeholder' => __('app.select_from_existing_females')]) !!}
+                            <div class="input-group">
+                                {{ Form::text('set_mother', null, ['class' => 'form-control input-sm', 'placeholder' => __('app.enter_new_name')]) }}
+                                <span class="input-group-btn">
+                                    {{ Form::submit(__('app.update'), ['class' => 'btn btn-info btn-sm', 'id' => 'set_mother_button']) }}
+                                    {{ link_to_route('users.show', __('app.cancel'), [$user->id], ['class' => 'btn btn-default btn-sm']) }}
+                                </span>
+                            </div>
+                            {{ Form::close() }}
                         @else
                             {{ $user->motherLink() }}
                             <div class="pull-right">
@@ -55,19 +57,19 @@
                     @endcan
                 </td>
             </tr>
-            <tr>
+            {{-- <tr>
                 <th class="col-sm-4">{{ __('user.parent') }}</th>
                 <td class="col-sm-8">
-                    @can ('edit', $user)
-                    <div class="pull-right">
-                        @unless (request('action') == 'set_parent')
-                            {{ link_to_route('users.show', __('user.set_parent'), [$user->id, 'action' => 'set_parent'], ['class' => 'btn btn-link btn-xs']) }}
-                        @endunless
-                    </div>
+                    @can('edit', $user)
+                        <div class="pull-right">
+                            @unless (request('action') == 'set_parent')
+                                {{ link_to_route('users.show', __('user.set_parent'), [$user->id, 'action' => 'set_parent'], ['class' => 'btn btn-link btn-xs']) }}
+                            @endunless
+                        </div>
                     @endcan
 
                     @if ($user->parent)
-                    {{ $user->parent->husband->name }} & {{ $user->parent->wife->name }}
+                        {{ $user->parent->husband->name }} & {{ $user->parent->wife->name }}
                     @endif
 
                     @can('edit', $user)
@@ -80,12 +82,12 @@
                         @endif
                     @endcan
                 </td>
-            </tr>
-            @if ($user->gender_id == 1)
+            </tr> --}}
+            {{-- @if ($user->gender_id == 1)
             <tr>
                 <th>{{ __('user.wife') }}</th>
                 <td>
-                    @can ('edit', $user)
+                    @can('edit', $user)
                     <div class="pull-right">
                         @unless (request('action') == 'add_spouse')
                             {{ link_to_route('users.show', __('user.add_wife'), [$user->id, 'action' => 'add_spouse'], ['class' => 'btn btn-link btn-xs']) }}
@@ -95,7 +97,7 @@
 
                     @if ($user->wifes->isEmpty() == false)
                         <ul class="list-unstyled">
-                            @foreach($user->wifes as $wife)
+                            @foreach ($user->wifes as $wife)
                             <li>{{ $wife->profileLink() }}</li>
                             @endforeach
                         </ul>
@@ -127,7 +129,7 @@
             <tr>
                 <th>{{ __('user.husband') }}</th>
                 <td>
-                    @can ('edit', $user)
+                    @can('edit', $user)
                     <div class="pull-right">
                         @unless (request('action') == 'add_spouse')
                             {{ link_to_route('users.show', __('user.add_husband'), [$user->id, 'action' => 'add_spouse'], ['class' => 'btn btn-link btn-xs']) }}
@@ -136,7 +138,7 @@
                     @endcan
                     @if ($user->husbands->isEmpty() == false)
                         <ul class="list-unstyled">
-                            @foreach($user->husbands as $husband)
+                            @foreach ($user->husbands as $husband)
                             <li>{{ $husband->profileLink() }}</li>
                             @endforeach
                         </ul>
@@ -164,7 +166,7 @@
                     @endcan
                 </td>
             </tr>
-            @endif
+            @endif --}}
         </tbody>
     </table>
 </div>
