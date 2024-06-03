@@ -26,6 +26,14 @@ Auth::routes();
 
 Route::get('/', [UsersController::class, 'search']);
 
+Route::controller(UsersController::class)->group(function () {
+    Route::get('profile-search', 'search')->name('users.search');
+    Route::get('users/{user}', 'show')->name('users.show');
+    Route::get('users/{user}/chart', 'chart')->name('users.chart');
+    Route::get('users/{user}/tree', 'tree')->name('users.tree');
+    Route::get('users/{user}/death', 'death')->name('users.death');
+});
+
 Route::middleware('auth')->group(function () {
 
     Route::controller(HomeController::class)->group(function () {
@@ -43,13 +51,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::controller(UsersController::class)->group(function () {
-        Route::get('profile-search', 'search')->name('users.search');
-        Route::get('users/{user}', 'show')->name('users.show');
         Route::get('users/{user}/edit', 'edit')->name('users.edit');
         Route::patch('users/{user}', 'update')->name('users.update');
-        Route::get('users/{user}/chart', 'chart')->name('users.chart');
-        Route::get('users/{user}/tree', 'tree')->name('users.tree');
-        Route::get('users/{user}/death', 'death')->name('users.death');
         Route::patch('users/{user}/photo-upload', 'photoUpload')->name('users.photo-upload');
         Route::delete('users/{user}', 'destroy')->name('users.destroy');
     });
